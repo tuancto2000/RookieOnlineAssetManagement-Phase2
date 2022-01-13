@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RookieOnlineAssetManagement", "RookieOnlineAssetManagement\RookieOnlineAssetManagement.csproj", "{91EA8BA4-E34C-4743-9C06-EB7A5F97313D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RookieOnlineAssetManagement.UnitTests", "RookieOnlineAssetManagement.UnitTests\RookieOnlineAssetManagement.UnitTests.csproj", "{071C25E8-EA59-4390-9689-7B18DBB49474}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM64 = Debug|ARM64
+		Release|Any CPU = Release|Any CPU
+		Release|ARM64 = Release|ARM64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{91EA8BA4-E34C-4743-9C06-EB7A5F97313D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91EA8BA4-E34C-4743-9C06-EB7A5F97313D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91EA8BA4-E34C-4743-9C06-EB7A5F97313D}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{91EA8BA4-E34C-4743-9C06-EB7A5F97313D}.Debug|ARM64.Build.0 = Debug|ARM64
+		{91EA8BA4-E34C-4743-9C06-EB7A5F97313D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91EA8BA4-E34C-4743-9C06-EB7A5F97313D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91EA8BA4-E34C-4743-9C06-EB7A5F97313D}.Release|ARM64.ActiveCfg = Release|ARM64
+		{91EA8BA4-E34C-4743-9C06-EB7A5F97313D}.Release|ARM64.Build.0 = Release|ARM64
+		{071C25E8-EA59-4390-9689-7B18DBB49474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{071C25E8-EA59-4390-9689-7B18DBB49474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{071C25E8-EA59-4390-9689-7B18DBB49474}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{071C25E8-EA59-4390-9689-7B18DBB49474}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{071C25E8-EA59-4390-9689-7B18DBB49474}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{071C25E8-EA59-4390-9689-7B18DBB49474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{071C25E8-EA59-4390-9689-7B18DBB49474}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{071C25E8-EA59-4390-9689-7B18DBB49474}.Release|ARM64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4E48341A-72F7-4A4D-9166-06C5AD19E306}
+	EndGlobalSection
+EndGlobal

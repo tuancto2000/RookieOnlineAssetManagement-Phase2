@@ -1,0 +1,114 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<style>
+    .validation-summary-errors ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 5px;
+    }
+</style>
+
+<div style="display: flex; align-items: center; justify-content: center; padding: 30px 0 50px 0;">
+    <img src="~/logo/Logo.png" width="100" height="100"/>
+    <div style="font-size: 25px; font-weight: bold; padding-left: 10px;">RookieOnlineAssetManagement</div>
+</div>
+<div class="row" style="justify-content: center;">
+    <div class="col-md-6">
+        <section style="border: 1px solid #C0C0C0; border-radius: 4px; padding: 20px 30px;">
+            <div style="display: flex; justify-content: center;">
+                <h4>Log in</h4>
+            </div>
+            <form id="account" method="post">
+                <div asp-validation-summary="All" class="text-danger" style="display: flex; justify-content: center;"></div>
+                <div class="form-group" id="Username">
+                    <label asp-for="Input.Username"></label>
+                    <input asp-for="Input.Username" class="form-control" />
+                    <span asp-validation-for="Input.Username" class="text-danger"></span>
+                </div>
+                <div class="form-group" id="Password">
+                    <label asp-for="Input.Password"></label>
+                    <input asp-for="Input.Password" class="form-control" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label asp-for="Input.RememberMe">
+                            <input asp-for="Input.RememberMe" />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" id="loginBtn">Log in</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        validate();
+        $('input').on('keyup', validate);
+
+        $('#account input').blur(function () {
+            const usernameError = "<span class='text-danger' id='usernameError'>The Username field is required.</span>"
+            const passwordError = "<span class='text-danger' id='passwordError'>The Password field is required.</span>"
+
+            if (!$(this).val() && $(this).attr('name') == "Input.Username") {
+                $("#usernameError").remove();
+                $("#Username").append($(usernameError));
+            }
+
+            if (!$(this).val() && $(this).attr('name') == "Input.Password") {
+                $("#passwordError").remove();
+                $("#Password").append($(passwordError));
+            }
+
+            if ($(this).val() && $(this).attr('name') == "Input.Username") {
+                $("#usernameError").remove();
+            }
+
+            if ($(this).val() && $(this).attr('name') == "Input.Password") {
+                $("#passwordError").remove();
+            }
+
+            if ($("#Input_Username-error").val() != null) {
+                $("#usernameError").remove();
+            }
+            if ($("#Input_Password-error").val() != null) {
+                $("#passwordError").remove();
+            }
+        });
+    });
+
+    function validate() {
+        var inputsWithValues = 0;
+
+        // get all input fields except for type='submit'
+        var myInputs = $("input:not([type='submit'])");
+
+        myInputs.each(function (e) {
+            // if it has a value, increment the counter
+            if ($(this).val()) {
+                inputsWithValues += 1;
+            }
+        });
+
+        if (inputsWithValues == myInputs.length) {
+            $("#loginBtn").prop("disabled", false);
+        } else {
+            $("#loginBtn").prop("disabled", true);
+        }
+    }
+</script>

@@ -1,0 +1,74 @@
+
+trigger:
+- main
+- master
+
+resources:
+- repo: self
+
+variables: 
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+stages:
+- stage: DotNetBuild
+  displayName: .Net Build
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      #name: Default
+      vmImage: $(vmImageName)
+    steps:
+#      - task: NodeTool@0
+#        displayName: Use Node 12.x
+#        inputs:
+#          versionSpec: 12.x
+#          checkLatest: true
+#      - task: UseDotNet@2
+#        displayName: Use .Net 5.0.202
+#        inputs:
+#          packageType: 'sdk'
+#          version: '5.0.202'
+      - task: DotNetCoreCLI@2
+        displayName: dotnet restore
+        inputs:
+          command: 'restore'
+          projects: 'RookieOnlineAssetManagement.sln'
+          feedsToUse: 'select'
+      - task: DotNetCoreCLI@2
+        displayName: Build
+        inputs:
+          command: 'build'
+          arguments: '--configuration Release'
+      - task: DotNetCoreCLI@2
+        displayName: Test
+        inputs:
+          command: 'test'
+          projects: |
+            RookieOnlineAssetManagement.UnitTests/*.csproj
+          arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+      - task: reportgenerator@4
+        displayName: Generate Test Report
+        inputs:
+          reports: '$(Build.SourcesDirectory)/**/*.cobertura.xml'
+          targetdir: '$(Build.SourcesDirectory)/CoverageResults'
+          assemblyfilters: '+RookieOnlineAssetManagement;+RookieOnlineAssetManagement.Services'
+      - task: PublishCodeCoverageResults@1
+        displayName: 'Publish Code Coverage'
+        inputs:
+          codeCoverageTool: Cobertura
+          summaryFileLocation: '$(Build.SourcesDirectory)/CoverageResults/Cobertura.xml'
+      - task: DotNetCoreCLI@2
+        displayName: Publish
+        inputs:
+          command: 'publish'
+          publishWebProjects: false
+          projects: |
+            RookieOnlineAssetManagement/*.csproj
+          arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+          ArtifactName: 'RookieOnlineAssetManagement'
+          publishLocation: 'Container'
